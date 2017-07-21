@@ -2,6 +2,10 @@ class Api::V1::AnimalsController < ApplicationController
 
   def index
     @animals = Animal.all
+    if params[:name]
+      name = params[:name]
+      @animals = Animal.search(name)
+    end
     json_response(@animals)
   end
 
