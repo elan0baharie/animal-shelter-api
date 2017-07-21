@@ -9,6 +9,18 @@ class Api::V1::AnimalsController < ApplicationController
     json_response(@animals)
   end
 
+  def random
+    animal_ids = []
+    @animals = Animal.all
+    @animals.each do |animal|
+      animal_ids.push(animal.id)
+    end
+    end_of_range = animal_ids.length
+    puts "Length of given array is #{animal_ids.length}"
+    @animal = Animal.find(rand(0..end_of_range))
+    json_response(@animal)
+  end
+
   def show
     @animal = Animal.find(params[:id])
     json_response(@animal)
